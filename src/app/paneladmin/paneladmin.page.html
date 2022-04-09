@@ -15,14 +15,14 @@
 </ion-header>
 
 <!-- Contenido si no se tiene informacion del tipo de cuenta -->
-<!-- <ion-content *ngIf="!this.varios.tipo_cuenta">
+<ion-content *ngIf="!this.varios.tipo_cuenta">
   <ion-item routerLink="/login"><ion-button>Reingresar</ion-button>
   </ion-item>
-</ion-content> -->
+</ion-content>
 
 
-<!-- <ion-content *ngIf="this.varios.tipo_cuenta=='999'" color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true"> -->
-<ion-content  color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true">
+<ion-content *ngIf="this.varios.tipo_cuenta=='999'" color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true">
+<!-- <ion-content  color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true"> -->
 
   <ion-card *ngIf="menuderechosuperior==true" style="position:sticky; float: right; width: fit-content; top:0%; z-index: 9999;">
     <ion-card-header>
