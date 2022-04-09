@@ -1,0 +1,7 @@
+{
+  "name": "beoboxapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
