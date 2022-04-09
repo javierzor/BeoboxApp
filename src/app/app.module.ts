@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
-
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +18,9 @@ import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
     HttpClientModule,
     IonicModule.forRoot(), 
     AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },Clipboard],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+                    Clipboard, 
+                    DatePipe],
   
   bootstrap: [AppComponent],
 })

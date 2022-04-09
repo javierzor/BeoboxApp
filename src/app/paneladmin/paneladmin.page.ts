@@ -9,6 +9,7 @@ import { ModalController } from '@ionic/angular';
 import { NuevafasePage } from '../modals/nuevafase/nuevafase.page';
 import { NuevacompraPage } from '../modals/nuevacompra/nuevacompra.page';
 import { ActualizardireccionPage } from '../modals/actualizardireccion/actualizardireccion.page';
+import { DatePipe } from '@angular/common'
 
 
 @Component({
@@ -32,7 +33,15 @@ export class PaneladminPage implements OnInit {
   respuestabeoboxanuncios: any;
   respuestabeoboxobteneradmindirecciones: any;
   cambiarestado_a: any;
+  fecha_inicio: string;
+  fecha_fin: string;
+  estado: any;
+  reportederegistros: any;
+  cambioelselector: boolean=false;
+
+
   constructor(
+    private datepipe : DatePipe,
     private alertController: AlertController,
     private variosservicios: VariosService,
     private modalController: ModalController,
@@ -396,7 +405,24 @@ async VerImagen(ImgUrl) {
       await alert.present();
     }
 
+    consultarReporte(){
+      var databeoboxconsultarreporte = {
+        nombre_solicitud:'beoboxconsultarreporte',
+        fecha_inicio: this.datepipe.transform(this.fecha_inicio, 'yyyyMMdd'),
+        fecha_fin: this.datepipe.transform(this.fecha_fin, 'yyyyMMdd'),
+        status:this.estado
+      }
+      this.variosservicios.variasfunciones(databeoboxconsultarreporte).subscribe(async( res: any ) =>{
+        console.log('respuesta de beoboxconsultarreporte', res);
+        this.cambioelselector=false;
+        this.reportederegistros=res;
+        });
+    }
 
+    IONCHANGEselector(){
+      this.cambioelselector=true;
+      console.log('cambioelselector',this.cambioelselector);
+    }
 
 
 }
