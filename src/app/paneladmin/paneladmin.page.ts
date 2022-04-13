@@ -10,6 +10,7 @@ import { NuevafasePage } from '../modals/nuevafase/nuevafase.page';
 import { NuevacompraPage } from '../modals/nuevacompra/nuevacompra.page';
 import { ActualizardireccionPage } from '../modals/actualizardireccion/actualizardireccion.page';
 import { DatePipe } from '@angular/common'
+import { ActualizarretirooficinaPage } from '../modals/actualizarretirooficina/actualizarretirooficina.page';
 
 
 @Component({
@@ -422,6 +423,23 @@ async VerImagen(ImgUrl) {
     IONCHANGEselector(){
       this.cambioelselector=true;
       console.log('cambioelselector',this.cambioelselector);
+    }
+
+    async abrireditardireccionderetiro(){
+      const modal = await this.modalController.create({
+        component: ActualizarretirooficinaPage,
+        componentProps: { 
+        },
+      });
+      modal.onDidDismiss().then((data) => {
+          console.log('data',data);
+          if(data.data.dismissed==true){
+            this.variosservicios.presentToast("Dirección actualizada");
+          }
+        });
+    
+    
+      return await modal.present();
     }
 
 

@@ -25,7 +25,7 @@ export class DireccionderetiroPage {
   informacion_perfil: any;
   step:any;
   languages_active: any;
-  direccionesderetiro: any;
+  direccionderetiro: any;
   ya_paso_1_segundo: boolean=false;
 
   constructor(
@@ -48,26 +48,22 @@ export class DireccionderetiroPage {
   }
   ionViewWillEnter(){
     this.menu.enable(true);
+    this.obtenerdirecciones();
   }
   async ngOnInit() {
     this.funcionverificarlogin();
     this.ObtenerProfileInfo();
     this.step='1';
     this.mostrardireccionTRAS1segundo();
-    this.obtenerdirecciones();
   }
 
   obtenerdirecciones(){
-    this.informacion_perfil=localStorage.getItem('profileInfo');
-    this.informacion_perfil=this.decrypt(this.informacion_perfil);
-    this.informacion_perfil=JSON.parse(this.informacion_perfil);
-    var databeoboxobtenerdirecciones = {
-      nombre_solicitud: 'beoboxobtenerdirecciones',
-      id_user: this.informacion_perfil.id
+    var databeoboxobtenerdireccionderetiro = {
+      nombre_solicitud: 'beoboxobtenerdireccionderetiro',
     }
-     this.variosservicios.variasfunciones(databeoboxobtenerdirecciones).subscribe(async( res: any ) =>{
-       console.log('respuesta de beoboxobtenerdirecciones', res);
-       this.direccionesderetiro=res;
+     this.variosservicios.variasfunciones(databeoboxobtenerdireccionderetiro).subscribe(async( res: any ) =>{
+       console.log('respuesta de beoboxobtenerdireccionderetiro', res);
+       this.direccionderetiro=res;
      });
   }
 

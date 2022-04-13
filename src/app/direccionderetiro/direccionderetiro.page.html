@@ -100,20 +100,19 @@
 </ion-card>
 
 
-<ion-card *ngIf="ya_paso_1_segundo">
+<ion-card *ngIf="ya_paso_1_segundo&&direccionderetiro">
   <ion-row class="ion-align-items-center">
     <ion-col size="4" class="ion-text-center">
-      <ion-text ><strong></strong>Sede principal</ion-text>
+      <ion-text ><strong></strong>{{direccionderetiro[0].oficina}}</ion-text>
     </ion-col>
     <ion-col size="3" class="ion-text-center">
-      <ion-text style="font-size: small;" >Bolivia av Juan Gomez Nro LTZ 2 A.</ion-text>
+      <ion-text style="font-size: small;" >{{direccionderetiro[0].direccion}}</ion-text>
     </ion-col>
     <ion-col size="2.5" class="ion-text-center">
-
-      +591123456789
+      {{direccionderetiro[0].telefono}}
     </ion-col>
     <ion-col size="2.5" class="ion-text-center">
-      Lun-Dom<br>(9am/10pm)
+      {{direccionderetiro[0].dias}}<br>{{direccionderetiro[0].horarios}}
     </ion-col>
     </ion-row>
     <ion-row>
