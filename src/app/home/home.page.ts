@@ -48,6 +48,7 @@ export class HomePage {
   respuestabeoboxanuncios: any;
   variabledelsegmentmodel:any='0';
   respuestabeoboxobteneradmindirecciones: any;
+  resumen: any;
   constructor(
     private loadingController: LoadingController,
     private variosservicios: VariosService,
@@ -68,6 +69,9 @@ export class HomePage {
     this.ObtenerProfileInfo();
     this.obtenerAnuncios();
     this.Obteneradmindirecciones();
+    this.ObtenerresumenDeCuenta();
+    this.variosservicios.activar_realtime_resumen_home=true;
+    this.ConRealTime();
   }
 
   async ngOnInit() {
@@ -93,6 +97,18 @@ export class HomePage {
      {
       console.log('Bienvenido:',this.verificarloginemail);
     }
+  }
+
+  ConRealTime(){
+  
+    setTimeout(() => 
+    {
+      if(this.variosservicios.activar_realtime_resumen_home==true){
+        this.ObtenerresumenDeCuenta(); 
+        this.ConRealTime();  //se repite
+      } 
+      },
+        13000);
   }
 
   ONCHANGEmenuderechosuperior(){
@@ -136,6 +152,22 @@ obtenerprecio_wera_usdsegunfase(){
 
 retirar(monto){
   console.log('el usuario desea retirar=',monto)
+}
+
+async ObtenerresumenDeCuenta(){
+  this.informacion_perfil=localStorage.getItem('profileInfo');
+  this.informacion_perfil=this.decrypt(this.informacion_perfil);
+  this.informacion_perfil=JSON.parse(this.informacion_perfil);
+  var databeoboxresumenmovimientos = {
+    nombre_solicitud: 'beoboxresumenmovimientos',
+    id_user: this.informacion_perfil.id
+
+  }
+  this.variosservicios.variasfunciones(databeoboxresumenmovimientos).subscribe(async( res: any ) =>{
+    console.log('respuesta de beoboxresumenmovimientos', res);
+    this.resumen=res;
+});
+
 }
 
 
@@ -185,6 +217,10 @@ async segmentChanged(event){
     this.variabledelsegmentmodel='0';
   }
 
+}
+
+ionViewWillLeave(){
+  this.variosservicios.activar_realtime_resumen_home=false;
 }
 
 

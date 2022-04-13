@@ -87,7 +87,7 @@
             <ion-text color="primary" >fecha</ion-text>
           </ion-col>
           <ion-col size="2.5" class="ion-text-center">
-            <ion-text color="primary" >Recibio</ion-text>
+            <ion-text color="primary" >Origen</ion-text>
           </ion-col>
           <ion-col size="2.5" class="ion-text-center">
             <ion-text color="primary" >Estado</ion-text>
@@ -119,18 +119,17 @@
     </ion-col>
     <ion-col size="2.5" class="ion-text-center">
       <ion-text color="primary" >
-        <a color="success" style="color:green" *ngIf="cadamovimiento.mas_o_menos=='mas'"><strong>+</strong></a>
-        <a color="danger" style="color:red" *ngIf="cadamovimiento.mas_o_menos=='menos'"><strong>-</strong></a>
-        {{cadamovimiento.monto}}&nbsp;<strong>BeoPts</strong></ion-text>
+        <ion-icon name="location"></ion-icon>
+        {{cadamovimiento.origen}}&nbsp;</ion-text>
     </ion-col>
     <ion-col size="2.5" class="ion-text-center">
-                <span *ngIf="cadamovimiento.status=='recibido'" style="text-transform:capitalize; margin-left: -20px;" class="v2-badge v2-badge-pendiente"><a style="vertical-align: inherit; color:orange;">{{cadamovimiento.status}}</a></span>
+                <span style="text-transform:capitalize; margin-left: -20px;" class="v2-badge v2-badge-pendiente"><a style="vertical-align: inherit; color:orange;">{{cadamovimiento.status}}</a></span>
     </ion-col>
     </ion-row>
     <ion-row>
         <ion-col>
           
-            <ion-buttons class="v2-badge v2-badge-pendiente"> <strong>Su Paquete:&nbsp;</strong> 
+            <ion-buttons transparent color="light" class="v2-badge v2-badge-fondoimagen"> <strong>Su Paquete:&nbsp;</strong> 
               <ion-button class="v2-badge v2-badge-imagen" (click)="VerImagen(cadamovimiento.reciboImgUrl)">Ver Imagen de paquete
                 &nbsp; <ion-icon color="success" name="eye-outline"></ion-icon> 
               </ion-button>

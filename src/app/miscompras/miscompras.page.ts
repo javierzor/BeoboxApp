@@ -49,26 +49,14 @@ export class MiscomprasPage {
   }
   ionViewWillEnter(){
     this.menu.enable(true);
+    this.variosservicios.activar_realtime_paqueteria=true;
+    this.ConRealTime();
   }
   async ngOnInit() {
     this.funcionverificarlogin();
     this.ObtenerProfileInfo();
     this.step='1';
     this.obtenermovimientos();
-  }
-
-  obtenermovimientos(){
-    this.informacion_perfil=localStorage.getItem('profileInfo');
-    this.informacion_perfil=this.decrypt(this.informacion_perfil);
-    this.informacion_perfil=JSON.parse(this.informacion_perfil);
-    var databeoboxobtenermovimientos = {
-      nombre_solicitud: 'beoboxobtenermovimientos',
-      id_user: this.informacion_perfil.id
-    }
-     this.variosservicios.variasfunciones(databeoboxobtenermovimientos).subscribe(async( res: any ) =>{
-       console.log('respuesta de beoboxobtenermovimientos', res);
-       this.movimientos=res;
-     });
   }
 
   funcionverificarlogin(){
@@ -107,6 +95,33 @@ async ObtenerProfileInfo(){
   }
 //Termina menu superior y sus ONCHANGE
 
+obtenermovimientos(){
+  this.informacion_perfil=localStorage.getItem('profileInfo');
+  this.informacion_perfil=this.decrypt(this.informacion_perfil);
+  this.informacion_perfil=JSON.parse(this.informacion_perfil);
+  var databeoboxobtenermovimientos = {
+    nombre_solicitud: 'beoboxobtenermovimientos',
+    id_user: this.informacion_perfil.id
+  }
+   this.variosservicios.variasfunciones(databeoboxobtenermovimientos).subscribe(async( res: any ) =>{
+     console.log('respuesta de beoboxobtenermovimientos', res);
+     this.movimientos=res;
+   });
+}
+
+ConRealTime(){
+  
+  setTimeout(() => 
+  {
+    if(this.variosservicios.activar_realtime_paqueteria==true){
+      this.obtenermovimientos(); 
+      this.ConRealTime();  //se repite
+    } 
+    },
+      15000);
+}
+
+
 async agregarcompra() {
   const modal = await this.modalController.create({
     component: NuevacompraPage,
@@ -142,6 +157,9 @@ async VerImagen(ImgUrl) {
   return await modal.present();
 }
 
+ionViewWillLeave(){
+  this.variosservicios.activar_realtime_paqueteria=false;
+}
 
 
 }

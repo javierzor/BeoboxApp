@@ -35,6 +35,7 @@ export class NuevacompraPage implements OnInit {
   origen: any;
   mostrarcampopuntos:  boolean = false;
   puntos:any;
+  observacion:any;
 
   constructor(
     private imageService: ImageService,
@@ -172,7 +173,8 @@ export class NuevacompraPage implements OnInit {
         origen:this.origen,
         mas_o_menos:'mas',
         monto:this.puntos,
-        reciboImgUrl: this.new_url_image
+        reciboImgUrl: this.new_url_image,
+        observacion: this.observacion
       }
     
 

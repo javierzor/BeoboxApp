@@ -74,12 +74,16 @@
               <ion-input [(ngModel)]="traking"></ion-input>
             </ion-item>
             <ion-item class="ion-no-padding" no-padding>
-              <ion-label position="floating">Peso:</ion-label>
-              <ion-input [(ngModel)]="peso"></ion-input>
+              <ion-label position="floating">Peso: <a style="font-size: 10px;color:rgb(114, 114, 114);">  Gramos</a></ion-label>
+              <ion-input type="number" [(ngModel)]="peso"></ion-input>
             </ion-item>
             <ion-item class="ion-no-padding" no-padding>
               <ion-label position="floating">Origen:</ion-label>
               <ion-input [(ngModel)]="origen"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding" no-padding>
+              <ion-label position="floating">Observación: <a style="font-size: 11px;color:green;">  (Nuevo)</a></ion-label>
+              <ion-input [(ngModel)]="observacion"></ion-input>
             </ion-item>
 
            </ion-list>
@@ -103,8 +107,7 @@
   </ion-card>
   
   
-  
-  <ion-button style="position:fixed; right:0; bottom:0;" (click)="agregarcompra()">
+  <ion-button [disabled]="!selected_user" style="position:fixed; right:0; bottom:0;" (click)="agregarcompra()">
     <ion-icon name="checkmark"></ion-icon>Agregar</ion-button>
   
 </ion-content>

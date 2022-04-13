@@ -42,11 +42,12 @@
     <br>
 
     <ion-card [hidden]="cadaanuncio.hidden==true"  *ngFor="let cadaanuncio of respuestabeoboxanuncios; let i = index;" style="border-radius:0%">
-      <ion-card style="margin:15px; border-radius:0%;background-color: #e48509;">
-        <ion-text style="margin:15px; "><strong style="color:white;">{{cadaanuncio.titulo}} &nbsp; </strong><a style="font-style: italic; color:rgb(216, 216, 216)">{{cadaanuncio.fecha | date:'medium':'GMT-4'}}</a></ion-text>
+      <ion-card style="margin:15px; border-radius:0%;background-color: #F2F2F2;">
+        <ion-text style="margin:15px; "><strong style="color:#F29F05;">{{cadaanuncio.titulo}} &nbsp; </strong><a style="font-style: italic; color:#F28705">{{cadaanuncio.fecha | date:'medium':'GMT-4'}}</a></ion-text>
         <br>
         <ion-text class="parrafosde2lineas" style="margin-left:15px; color:white;">
-          <a *ngIf="cadaanuncio.prioridad=='importante'">Importante: </a>{{cadaanuncio.descripcion}}
+          <a *ngIf="cadaanuncio.prioridad=='importante'" style="color:#260101">Importante: </a>
+          <a style="color:#606060;">{{cadaanuncio.descripcion}}</a>
           <span style="position:absolute; bottom:0px; right:0px; cursor:pointer;" class="v2-badge v2-badge-primary" (click)="ocultaranuncio(cadaanuncio, i)">
             Ocultar</span>
           <br>
@@ -162,16 +163,16 @@
                 <ion-card-content>
                   <ion-list class="ion-no-padding" no-padding>
                     <ion-item  class="ion-no-padding" no-padding>
-                      <ion-text>Usted tiene actualmente <a color="Primary">0</a> pedidos Recibidos</ion-text><br>
+                      <ion-text>Usted tiene actualmente <a *ngIf="resumen&&resumen[0]" color="Primary">{{resumen[0].length}}</a> pedidos Recibidos</ion-text><br>
                     </ion-item>
                     <ion-item  class="ion-no-padding" no-padding>
-                      <ion-text>Usted tiene actualmente <a color="Primary">0</a> pedidos En transito</ion-text><br>
+                      <ion-text>Usted tiene actualmente <a *ngIf="resumen&&resumen[1]" color="Primary">{{resumen[1].length}}</a> pedidos En transito</ion-text><br>
                     </ion-item>
                     <ion-item  class="ion-no-padding" no-padding>
-                      <ion-text>Usted tiene actualmente <a color="Primary">0</a> pedidos Listo para entrega</ion-text><br>
+                      <ion-text>Usted tiene actualmente <a *ngIf="resumen&&resumen[2]" color="Primary">{{resumen[2].length}}</a> pedidos Listo para entrega</ion-text><br>
                     </ion-item>
                     <ion-item  class="ion-no-padding" no-padding>
-                      <ion-text>Usted tiene actualmente <a color="Primary">0</a> Entregados</ion-text><br>
+                      <ion-text>Usted tiene actualmente <a *ngIf="resumen&&resumen[3]" color="Primary">{{resumen[3].length}}</a> Entregados</ion-text><br>
                     </ion-item>
                   </ion-list>
                 </ion-card-content>

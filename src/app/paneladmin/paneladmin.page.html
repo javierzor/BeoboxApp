@@ -21,7 +21,7 @@
 </ion-content>
 
 
-<ion-content *ngIf="this.varios.tipo_cuenta=='999'" color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true">
+<ion-content *ngIf="this.varios.tipo_cuenta=='999'||this.varios.tipo_cuenta=='888'" color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true">
 <!-- <ion-content  color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true"> -->
 
   <ion-card *ngIf="menuderechosuperior==true" style="position:sticky; float: right; width: fit-content; top:0%; z-index: 9999;">
@@ -53,17 +53,17 @@ mode="ios"
 (ionChange)="segmentChanged()"
 >
 
-    <ion-segment-button [disabled]="segmentModel=='solicitudesdecompras'" value="solicitudesdecompras">
+    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'||this.varios.tipo_cuenta=='888'" [disabled]="segmentModel=='solicitudesdecompras'" value="solicitudesdecompras">
       <ion-button [disabled]="segmentModel=='solicitudesdecompras'" > 
          <ion-label>Paquetes</ion-label>
       </ion-button>
     </ion-segment-button>
-    <ion-segment-button [disabled]="segmentModel=='activardesacusuario'" value="activardesacusuario">
+    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'" [disabled]="segmentModel=='activardesacusuario'" value="activardesacusuario">
       <ion-button [disabled]="segmentModel=='activardesacusuario'"> 
       <ion-label>Activar/ <br>Desac. usuario</ion-label>
       </ion-button>
     </ion-segment-button>
-    <ion-segment-button [disabled]="segmentModel=='chatdesoporte'" value="chatdesoporte">
+    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'||this.varios.tipo_cuenta=='888'" [disabled]="segmentModel=='chatdesoporte'" value="chatdesoporte">
       <ion-button [disabled]="segmentModel=='chatdesoporte'"> 
       <ion-label>tickets Soporte</ion-label>
       </ion-button>
@@ -81,17 +81,17 @@ mode="ios"
 (ionChange)="segmentChanged()"
 >
 
-    <ion-segment-button [disabled]="segmentModel=='direcciones'" value="direcciones">
+    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'" [disabled]="segmentModel=='direcciones'" value="direcciones">
       <ion-button [disabled]="segmentModel=='direcciones'" > 
          <ion-label>Direcciones (TODAS)</ion-label>
       </ion-button>
     </ion-segment-button>
-    <ion-segment-button [disabled]="segmentModel=='veraumentarfase'" value="veraumentarfase">
+    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'" [disabled]="segmentModel=='veraumentarfase'" value="veraumentarfase">
      <ion-button [disabled]="segmentModel=='veraumentarfase'"> 
         <ion-label>Ver o editar<br>anuncios</ion-label> 
      </ion-button>
     </ion-segment-button>
-    <ion-segment-button [disabled]="segmentModel=='reportes'" value="reportes">
+    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'" [disabled]="segmentModel=='reportes'" value="reportes">
       <ion-button [disabled]="segmentModel=='reportes'"> 
       <ion-label>Reportes</ion-label>
       </ion-button>
@@ -110,7 +110,7 @@ mode="ios"
     <ion-icon name="add-circle-outline"></ion-icon>
     Agregar</ion-button><br></ion-text>
     
-<ion-text style="font-size: small;">Usr=Usuario | BC=BeoCode | PTS=Puntos | Nom=Nombre | Tr=Traking | PE=Peso | Or=Origen | Est=Estado</ion-text>
+<ion-text style="font-size: small;">Usr=Usuario | BC=BeoCode | PTS=Puntos | Nom=Nombre | Tr=Traking | PE=Peso | Or=Origen | Est=Estado | Obs=Observación</ion-text>
 <ion-grid class="ion-no-padding" no-padding>
   <ion-card *ngFor="let movimiento of respuestadebeoboxadminobtenermovimientos">
   <ion-row class="ion-no-padding" no-padding>
@@ -138,6 +138,8 @@ mode="ios"
         <a color="primary">Or</a>:{{movimiento.origen}}
         <br>
         <a color="primary">Est</a>:<strong>{{movimiento.status}}</strong>
+        <br>
+        <a color="primary">Obs</a>:<strong>{{movimiento.observacion}}</strong>
 
     </ion-col>
     <ion-col  size="4"   class="ion-no-padding" no-padding>
@@ -159,16 +161,12 @@ mode="ios"
 
 </section>
 
-<section *ngIf="segmentModel=='activardesacusuario'">
+<section *ngIf="segmentModel=='activardesacusuario'&&this.varios.tipo_cuenta=='999'">
 
 <ion-grid>
   <ion-card *ngFor="let cadausuario of respuestadebeoboxadminobtenerlistadeuduarios">
     <ion-row>
       <ion-col >
-        <span style="margin-left: 5px;" class="v2-badge v2-badge-movimientos">
-          <a style="vertical-align: inherit; color:#ffffff;">User:</a></span>
-          {{cadausuario.username}}
-          <br>
           <span style="margin-left: 5px;" class="v2-badge v2-badge-movimientos">
             <a style="vertical-align: inherit; color:#ffffff;">mail:</a></span>
             {{cadausuario.email}}
@@ -197,7 +195,7 @@ mode="ios"
 </section>
 
 
-<section *ngIf="segmentModel=='veraumentarfase'">
+<section *ngIf="segmentModel=='veraumentarfase'&&this.varios.tipo_cuenta=='999'">
 
   <ion-grid class="ion-no-padding" no-padding>
     <ion-row style="margin-bottom:15px">
@@ -249,7 +247,7 @@ mode="ios"
     </ion-grid>
 </section>
 
-    <section *ngIf="segmentModel=='direcciones'">
+    <section *ngIf="segmentModel=='direcciones'&&this.varios.tipo_cuenta=='999'">
       <ion-grid>
 
       <ion-row>
@@ -284,7 +282,7 @@ mode="ios"
       </ion-grid>
     </section>
 
-    <section *ngIf="segmentModel=='reportes'">
+    <section *ngIf="segmentModel=='reportes'&&this.varios.tipo_cuenta=='999'">
       <ion-grid>
       <ion-card>
         <ion-row>

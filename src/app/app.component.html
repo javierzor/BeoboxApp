@@ -27,6 +27,13 @@
         </ion-button>
       </ion-item>
 
+      <ion-item (click)="toggleMenu()" *ngIf="this.varios.tipo_cuenta==888" routerLink="/paneladmin">
+        <ion-icon slot="start" name="log-in-outline"></ion-icon>
+        <ion-button (click)="iralpaneladmin()">
+          Moderador Panel
+        </ion-button>
+      </ion-item>
+
       <ion-list lines="none">
         <ion-list-header>
           Menu Principal:

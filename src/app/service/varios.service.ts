@@ -9,6 +9,9 @@ export class VariosService {
 
   isLoading = false;
   tipo_cuenta:any;
+  activar_realtime_paqueteria: boolean = false;
+  activar_realtime_resumen_home: boolean = false;
+
   ir_a_registro: string='registro';
   constructor(
     public toastController: ToastController,
