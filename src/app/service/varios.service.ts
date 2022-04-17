@@ -11,6 +11,9 @@ export class VariosService {
   tipo_cuenta:any;
   activar_realtime_paqueteria: boolean = false;
   activar_realtime_resumen_home: boolean = false;
+  activar_realtime_user_conversaciones: boolean = false;
+  activar_realtime_admin_conversaciones: boolean = false;
+  activar_real_time_modal_ver_conversacion_chat: boolean = false;
 
   ir_a_registro: string='registro';
   constructor(

@@ -71,6 +71,14 @@ const routes: Routes = [
     path: 'actualizarretirooficina',
     loadChildren: () => import('./modals/actualizarretirooficina/actualizarretirooficina.module').then( m => m.ActualizarretirooficinaPageModule)
   },
+  {
+    path: 'tickets',
+    loadChildren: () => import('./tickets/tickets.module').then( m => m.TicketsPageModule)
+  },
+  {
+    path: 'verconversacion',
+    loadChildren: () => import('./modals/verconversacion/verconversacion.module').then( m => m.VerconversacionPageModule)
+  },
 ];
 
 @NgModule({
