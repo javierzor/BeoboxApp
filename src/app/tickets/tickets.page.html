@@ -55,7 +55,7 @@
         <ion-text *ngIf="ticket.asunto" style="font-size: small;">Asunto: {{ticket.asunto}}</ion-text>
       </ion-col>
       <ion-col size="4">
-        <ion-text *ngIf="ticket.status" style="font-size: small;">Asunto: <a style="text-transform:capitalize;" [class]="ticket.status=='abierto' ? 'v2-badge-abierto v2-badge' : 'v2-badge-cerrado v2-badge'">{{ticket.status}}</a></ion-text>
+        <ion-text *ngIf="ticket.status" style="font-size: small;">Estado:<br> <a style="text-transform:capitalize;" [class]="ticket.status=='abierto' ? 'v2-badge-abierto v2-badge' : 'v2-badge-cerrado v2-badge'">{{ticket.status}}</a></ion-text>
       </ion-col>
       <ion-col style="font-size: small;" size="4">
         {{ticket.fecha}}<br>

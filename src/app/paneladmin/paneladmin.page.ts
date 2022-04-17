@@ -11,6 +11,8 @@ import { NuevacompraPage } from '../modals/nuevacompra/nuevacompra.page';
 import { ActualizardireccionPage } from '../modals/actualizardireccion/actualizardireccion.page';
 import { DatePipe } from '@angular/common'
 import { ActualizarretirooficinaPage } from '../modals/actualizarretirooficina/actualizarretirooficina.page';
+import { VerconversacionPage } from '../modals/verconversacion/verconversacion.page';
+import { AdminverconversacionPage } from '../modals/adminverconversacion/adminverconversacion.page';
 
 
 @Component({
@@ -39,6 +41,7 @@ export class PaneladminPage implements OnInit {
   estado: any;
   reportederegistros: any;
   cambioelselector: boolean=false;
+  listasdechat: any;
 
 
   constructor(
@@ -57,6 +60,7 @@ export class PaneladminPage implements OnInit {
   ionViewWillEnter(){
     this.menu.enable(true);
     this.ObtenerProfileInfo();
+    this.variosservicios.activar_realtime_admin_conversaciones=true;
   }
   async ngOnInit() {
     this.segmentModel=null;
@@ -113,7 +117,9 @@ async ObtenerProfileInfo(){
     message: 'Actualizando...',spinner: 'bubbles',duration: 15000,
     });
     console.log(this.segmentModel);
-    actualizando.present();
+    if(this.segmentModel!='chatdesoporte'){
+      actualizando.present();
+    }
     
 if(this.segmentModel=='solicitudesdecompras'){
   var databeoboxadminobtenermovimientos = {
@@ -166,9 +172,53 @@ if(this.segmentModel=='reportes'){
    actualizando.dismiss();
 }
 
+if(this.segmentModel=='chatdesoporte'){
+  actualizando.dismiss();
+  this.varios.activar_realtime_admin_conversaciones=true;
+  if(this.varios.activar_realtime_admin_conversaciones==true&&this.varios.activar_real_time_modal_ver_conversacion_chat==false){
+    
+    this.FuncionObtenerlistasdechat();
+        setTimeout(()=>{ 
+          this.segmentModel='chatdesoporte';
+          this.segmentChanged();
+          },8000);
+      }
+}
 
 
 }
+
+FuncionObtenerlistasdechat(){
+  var databeoboxobteneradminconversaciones = {
+    nombre_solicitud: 'beoboxobteneradminconversaciones'
+  }
+   this.variosservicios.variasfunciones(databeoboxobteneradminconversaciones).subscribe(async( res: any ) =>{
+     console.log('respuesta de beoboxobteneradminconversaciones', res);
+     this.listasdechat=res
+   });
+}
+
+async leermensajes(ticket) {
+  const modal = await this.modalController.create({
+    component: AdminverconversacionPage,
+    componentProps: { 
+      dataparaelmodal:ticket
+    }
+    });
+  modal.onDidDismiss().then((data) => {
+      console.log('data',data);
+      console.log('data',data);
+      this.varios.activar_realtime_admin_conversaciones=true;
+      this.varios.activar_real_time_modal_ver_conversacion_chat=false;
+      this.segmentModel='chatdesoporte';
+      this.segmentChanged();
+      
+    });
+
+
+  return await modal.present();
+}
+
 
 
 suspender(){
@@ -440,6 +490,11 @@ async VerImagen(ImgUrl) {
     
     
       return await modal.present();
+    }
+
+
+    ionViewWillLeave(){
+      this.variosservicios.activar_realtime_user_conversaciones=false;
     }
 
 

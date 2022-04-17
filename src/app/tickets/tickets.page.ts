@@ -39,20 +39,20 @@ export class TicketsPage implements OnInit {
     private imageService: ImageService,
     private paises: PaisesService,
     public alertController: AlertController
-
-  ) 
+  )
   {
-
     this.countryData=this.paises.countryData;    
     this.funcionverificarlogin();
     this.ObtenerProfileInfo();
     this.step='1';
   }
+
   ionViewWillEnter(){
     this.menu.enable(true);
     this.variosservicios.activar_realtime_user_conversaciones=true;
     this.ConRealTime();
   }
+  
   async ngOnInit() {
     this.funcionverificarlogin();
     this.ObtenerProfileInfo();
@@ -119,7 +119,7 @@ ConRealTime(){
       this.ConRealTime();  //se repite
     } 
     },
-      11000);
+      8000);
 }
 
   async crearticket(){
@@ -199,10 +199,6 @@ async leermensajes(ticket) {
 
   return await modal.present();
 }
-
-
-
-
 
 
 

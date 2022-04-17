@@ -79,6 +79,10 @@ const routes: Routes = [
     path: 'verconversacion',
     loadChildren: () => import('./modals/verconversacion/verconversacion.module').then( m => m.VerconversacionPageModule)
   },
+  {
+    path: 'adminverconversacion',
+    loadChildren: () => import('./modals/adminverconversacion/adminverconversacion.module').then( m => m.AdminverconversacionPageModule)
+  },
 ];
 
 @NgModule({
