@@ -232,8 +232,19 @@ mode="ios"
 
 <section *ngIf="segmentModel=='chatdesoporte'">
 
+  <ion-card>
+    <ion-grid *ngIf="!listasdechat">
+      <ion-row>
+        <ion-col>
+          <ion-text><h4>Porfavor espere, cargando lista de tickets...</h4></ion-text>
+          <img width="50%" src="assets/chat/one-chat/loading_chat.gif">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
   <ion-card (click)="leermensajes(ticket)" *ngFor="let ticket of listasdechat">
-    <ion-grid>
+    <ion-grid *ngIf="listasdechat">
       <ion-row>
         <ion-col size="4">
           <ion-text *ngIf="ticket.asunto" style="font-size: small;">Asunto: {{ticket.asunto}}</ion-text>

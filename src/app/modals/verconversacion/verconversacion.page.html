@@ -28,9 +28,7 @@
         <ion-col size="9" [class]="message.es_admin_mensaje=='0' ? 'message my-message' : 'other-message'"
         >
         <b *ngIf="message.es_admin_mensaje=='0'" style="color: rgb(205, 44, 127);">Yo</b>
-        <b *ngIf="message.es_admin_mensaje=='1'" style="color: #86689F;">{{dataparaelmodal.userdetalles.name}} 
-          {{dataparaelmodal.userdetalles.lastname}} | 
-          {{dataparaelmodal.userdetalles.id_publico}}:</b>
+        <b *ngIf="message.es_admin_mensaje=='1'" style="color: #86689F;">Soporte:</b>
         <br>
         <span>{{ message.mensaje }}
         </span>
