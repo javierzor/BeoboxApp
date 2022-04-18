@@ -119,6 +119,7 @@ async ObtenerProfileInfo(){
     console.log(this.segmentModel);
     if(this.segmentModel!='chatdesoporte'){
       actualizando.present();
+      this.varios.activar_realtime_admin_conversaciones=false;
     }
     
 if(this.segmentModel=='solicitudesdecompras'){
@@ -177,9 +178,9 @@ if(this.segmentModel=='chatdesoporte'){
   this.varios.activar_realtime_admin_conversaciones=true;
   if(this.varios.activar_realtime_admin_conversaciones==true&&this.varios.activar_real_time_modal_ver_conversacion_chat==false){
     
-    this.FuncionObtenerlistasdechat();
-        setTimeout(()=>{ 
-          this.segmentModel='chatdesoporte';
+    setTimeout(()=>{ 
+          this.FuncionObtenerlistasdechat();
+          // this.segmentModel='chatdesoporte';
           this.segmentChanged();
           },8000);
       }
@@ -194,7 +195,7 @@ FuncionObtenerlistasdechat(){
   }
    this.variosservicios.variasfunciones(databeoboxobteneradminconversaciones).subscribe(async( res: any ) =>{
      console.log('respuesta de beoboxobteneradminconversaciones', res);
-     this.listasdechat=res
+     this.listasdechat=res;
    });
 }
 
