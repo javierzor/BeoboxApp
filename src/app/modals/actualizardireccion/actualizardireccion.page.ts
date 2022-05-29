@@ -58,7 +58,8 @@ cadadireccion;
       direccion_1:this.cadadireccion.direccion_1,
       ciudad:this.cadadireccion.ciudad,
       estado:this.cadadireccion.estado,
-      codigo_postal:this.cadadireccion.codigo_postal
+      codigo_postal:this.cadadireccion.codigo_postal,
+      telefono:this.cadadireccion.telefono
     }
      this.variosservicios.variasfunciones(databeoboxactualizaradmindireccion).subscribe(async( res: any ) =>{
        console.log('respuesta de beoboxactualizaradmindireccion', res);
