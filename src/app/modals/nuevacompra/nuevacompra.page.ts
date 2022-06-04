@@ -26,7 +26,7 @@ export class NuevacompraPage implements OnInit {
   montopasadoaweras: any = null;
   precio_wera_usd: any;
   filterTerm: string;
-  respuestaobtenerusuariosbusqueda: any;
+  respuestabeoboxobtenerusuariosbusqueda: any;
   mostrarleusuarios:  boolean = false;
   selected_user: any;
   indexdeusuario: any;
@@ -65,12 +65,12 @@ export class NuevacompraPage implements OnInit {
   }
 
   ObtenerUsariosNormales(){
-    var dataobtenerusuariosbusqueda = {
-      nombre_solicitud: 'obtenerusuariosbusqueda'
+    var databeoboxobtenerusuariosbusqueda = {
+      nombre_solicitud: 'beoboxobtenerusuariosbusqueda'
     }
-    this.variosservicios.variasfunciones(dataobtenerusuariosbusqueda).subscribe(async( res: any ) =>{
-      console.log('respuesta de obtenerusuariosbusqueda', res);
-      this.respuestaobtenerusuariosbusqueda=res;
+    this.variosservicios.variasfunciones(databeoboxobtenerusuariosbusqueda).subscribe(async( res: any ) =>{
+      console.log('respuesta de beoboxobtenerusuariosbusqueda', res);
+      this.respuestabeoboxobtenerusuariosbusqueda=res;
   });
   }
 

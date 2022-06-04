@@ -31,7 +31,7 @@
       </ion-row>
       
       <ion-list *ngIf="mostrarleusuarios==true">
-        <ion-item (click)="esteusuario(usuario, i)" *ngFor="let usuario of respuestaobtenerusuariosbusqueda | filter:filterTerm ; let i = index;">
+        <ion-item (click)="esteusuario(usuario, i)" *ngFor="let usuario of respuestabeoboxobtenerusuariosbusqueda | filter:filterTerm ; let i = index;">
           <ion-label>{{usuario.name}}
             <a color="primary">|</a>
             {{usuario.lastname}}
