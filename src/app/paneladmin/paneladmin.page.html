@@ -60,7 +60,7 @@ mode="ios"
     </ion-segment-button>
     <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'" [disabled]="segmentModel=='activardesacusuario'" value="activardesacusuario">
       <ion-button [disabled]="segmentModel=='activardesacusuario'"> 
-      <ion-label>Activar/ <br>Desac. usuario</ion-label>
+      <ion-label>Administrar<br>Usuarios</ion-label>
       </ion-button>
     </ion-segment-button>
     <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'||this.varios.tipo_cuenta=='888'" [disabled]="segmentModel=='chatdesoporte'" value="chatdesoporte">
@@ -163,8 +163,13 @@ mode="ios"
 
 <section *ngIf="segmentModel=='activardesacusuario'&&this.varios.tipo_cuenta=='999'">
 
+
+  <ion-button (click)="EditarEquipox()">Administrar Equipo</ion-button>
+
+  <ion-searchbar [(ngModel)]="filterTerm" placeholder="Filtrar, Mejorar resultados de lista de usuario..."></ion-searchbar>
+
 <ion-grid>
-  <ion-card *ngFor="let cadausuario of respuestadebeoboxadminobtenerlistadeuduarios">
+  <ion-card *ngFor="let cadausuario of respuestadebeoboxadminobtenerlistadeuduarios| filter:filterTerm ;">
     <ion-row>
       <ion-col >
           <span style="margin-left: 5px;" class="v2-badge v2-badge-movimientos">
@@ -186,6 +191,9 @@ mode="ios"
 
         <!-- <ion-button>Desactivar</ion-button> -->
                
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="BorrarUsuario(cadausuario)"><ion-icon name="close-circle"></ion-icon></ion-button>
       </ion-col>
   
     </ion-row>

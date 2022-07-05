@@ -29,6 +29,7 @@ export class TicketsPage implements OnInit {
   step:any;
   languages_active: any;
   tickets: any;
+  tituloticketparaenviarcorreo: any;
 
   constructor(
     private modalController: ModalController,
@@ -148,7 +149,7 @@ ConRealTime(){
           handler: (alertData) => {
 
             if(alertData.asunto&&alertData.asunto!=''){
-
+              this.tituloticketparaenviarcorreo=alertData.asunto;
               this.informacion_perfil=localStorage.getItem('profileInfo');
               this.informacion_perfil=this.decrypt(this.informacion_perfil);
               this.informacion_perfil=JSON.parse(this.informacion_perfil);
@@ -161,6 +162,7 @@ ConRealTime(){
                  console.log('respuesta de beoboxcrearticket', res);
                  this.obtenertickets();
                  this.leermensajes(res);
+                 this.EnviarMailPorCreacionDeTicket();
                 });
 
             }
@@ -179,6 +181,29 @@ ConRealTime(){
 
 }
 
+async EnviarMailPorCreacionDeTicket(){
+
+  var strdedia = new Date();
+  var datestring = strdedia.toString();
+
+  this.informacion_perfil=localStorage.getItem('profileInfo');
+  this.informacion_perfil=this.decrypt(this.informacion_perfil);
+  this.informacion_perfil=JSON.parse(this.informacion_perfil);
+
+  var databeoboxenviaremailticket = {
+    nombre_solicitud: 'beoboxenviaremailticket',
+    to: 'javier20450@gmail.com',
+    nombre_autor_ticket: this.informacion_perfil.name+' '+this.informacion_perfil.lastname,
+    id_publico_autor_ticket: this.informacion_perfil.id_publico,
+    tituloticket: this.tituloticketparaenviarcorreo,
+    datestring: datestring,
+  }
+   console.log('data a enviar',databeoboxenviaremailticket);
+   this.variosservicios.variasfunciones(databeoboxenviaremailticket).subscribe(async( res: any ) =>{
+     console.log('respuesta de beoboxenviaremailticket', res);
+    });
+
+  }
 
 
 async leermensajes(ticket) {

@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common'
 import { ActualizarretirooficinaPage } from '../modals/actualizarretirooficina/actualizarretirooficina.page';
 import { VerconversacionPage } from '../modals/verconversacion/verconversacion.page';
 import { AdminverconversacionPage } from '../modals/adminverconversacion/adminverconversacion.page';
+import { EditarequipoPage } from '../modals/editarequipo/editarequipo.page';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class PaneladminPage implements OnInit {
   reportederegistros: any;
   cambioelselector: boolean=false;
   listasdechat: any;
+  filterTerm: string;
 
 
   constructor(
@@ -188,6 +190,24 @@ if(this.segmentModel=='chatdesoporte'){
 
 
 }
+
+async EditarEquipox() {
+  const modal = await this.modalController.create({
+    component: EditarequipoPage,
+    componentProps: { 
+      dataparaelmodal:'nadaparaenviar'
+    }
+    });
+  modal.onDidDismiss().then((data) => {
+      console.log('data',data);
+      if(data.data.dismissed==true){
+      }
+    });
+
+
+  return await modal.present();
+}
+
 
 FuncionObtenerlistasdechat(){
   var databeoboxobteneradminconversaciones = {
@@ -455,6 +475,20 @@ async VerImagen(ImgUrl) {
       });
   
       await alert.present();
+    }
+
+    BorrarUsuario(cadausuario){
+      var databeoboxborraranuncio = {
+        nombre_solicitud: 'beoboxborrarusuario',
+        id:cadausuario.id
+      }
+       this.variosservicios.variasfunciones(databeoboxborraranuncio).subscribe(async( res: any ) =>{
+         console.log('respuesta de beoboxborraranuncio', res);
+         if(res){
+            this.segmentModel='activardesacusuario';
+            this.segmentChanged();
+         }
+         });
     }
 
     consultarReporte(){

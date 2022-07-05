@@ -83,6 +83,10 @@ const routes: Routes = [
     path: 'adminverconversacion',
     loadChildren: () => import('./modals/adminverconversacion/adminverconversacion.module').then( m => m.AdminverconversacionPageModule)
   },
+  {
+    path: 'editarequipo',
+    loadChildren: () => import('./modals/editarequipo/editarequipo.module').then( m => m.EditarequipoPageModule)
+  },
 ];
 
 @NgModule({
