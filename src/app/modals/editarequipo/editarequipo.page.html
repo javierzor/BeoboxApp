@@ -1,1 +1,62 @@
-<ion-fab-button  size="small" (click)="dismiss()" color="danger"><ion-icon name="close"></ion-icon></ion-fab-button>
+<ion-content>
+<ion-grid>
+
+
+    <ion-fab-button  size="small" (click)="dismiss()" color="danger"><ion-icon name="close"></ion-icon></ion-fab-button>
+
+
+
+<section *ngIf="this.step=='1'">
+    &nbsp;&nbsp;<ion-button (click)="step2()" color="success"><ion-icon name="add-circle"></ion-icon>Agregar</ion-button>
+    <ion-card *ngFor="let cadaadmin of respuestabeoboxtraerusuariosadministradores">
+        <ion-card-header color="primary">
+            <ion-card-subtitle *ngIf="cadaadmin.tipo_cuenta=='999'">Administrador&nbsp;<span class="v2-badge-borrar v2-badge" style="cursor:pointer;">Borrar</span></ion-card-subtitle>
+            <ion-card-subtitle *ngIf="cadaadmin.tipo_cuenta=='888'">Moderador&nbsp;<span class="v2-badge-borrar v2-badge" style="cursor:pointer;">Borrar</span></ion-card-subtitle>
+        </ion-card-header>
+    
+        <ion-card-content>
+            <ion-text>{{cadaadmin.name}} {{cadaadmin.lastname}}</ion-text>
+            &nbsp;<a color="primary"><strong>|</strong></a>&nbsp;
+            <ion-text>{{cadaadmin.email}}
+            &nbsp;<a color="primary"><strong>|</strong></a>&nbsp;    
+            {{cadaadmin.create_date | date:'shortDate'}}</ion-text>
+    
+        </ion-card-content>
+        </ion-card>
+    
+</section>
+<section *ngIf="this.step=='2'">
+    <ion-button (click)="step1()"><ion-icon name="caret-back-outline"></ion-icon>Volver</ion-button>
+    <br>
+    <ion-text>Agregar usuario al equipo:</ion-text>
+    <ion-list>
+        <ion-radio-group value="888" [(ngModel)]="tipo_cuenta" >
+          <ion-list-header>
+                    <ion-label>Tipo</ion-label>
+        </ion-list-header>
+              <ion-row>
+                  <ion-col>
+                    <ion-item>
+                        <ion-label>Moderador</ion-label>
+                        <ion-radio slot="start" value="888"></ion-radio>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col>
+                    <ion-item>
+                        <ion-label>Admin</ion-label>
+                        <ion-radio slot="start" value="999"></ion-radio>
+                      </ion-item> 
+                  </ion-col>
+              </ion-row>
+
+            <ion-label>Name</ion-label>
+      
+
+        </ion-radio-group>
+      </ion-list>
+</section>
+
+
+
+</ion-grid>
+</ion-content>
