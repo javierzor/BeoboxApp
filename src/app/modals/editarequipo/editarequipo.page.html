@@ -20,7 +20,20 @@
             <ion-text>{{cadaadmin.email}}
             &nbsp;<a color="primary"><strong>|</strong></a>&nbsp;    
             {{cadaadmin.create_date | date:'shortDate'}}</ion-text>
-    
+            &nbsp;
+            <ion-list>
+                <ion-item>
+                    <ion-label>Tickets Mails</ion-label>
+                    <ion-toggle [checked]="cadaadmin.ticketsmail" (ionChange)="cambiotickets(cadaadmin.ticketsmail, cadaadmin.id)"></ion-toggle>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>Suspendido</ion-label>
+                    <ion-toggle disabled></ion-toggle>
+                  </ion-item>
+            </ion-list>
+            <!-- <ion-toggle [checked]="cadaadmin.ticketsmail"></ion-toggle> -->
+
+
         </ion-card-content>
         </ion-card>
     
@@ -29,15 +42,15 @@
     <ion-button (click)="step1()"><ion-icon name="caret-back-outline"></ion-icon>Volver</ion-button>
     <br>
     <ion-text>Agregar usuario al equipo:</ion-text>
-    <ion-list>
-        <ion-radio-group value="888" [(ngModel)]="tipo_cuenta" >
+    <ion-list class="ion-no-padding" no-padding>
+        <ion-radio-group value="888" [(ngModel)]="tipo_cuenta"  class="ion-no-padding" no-padding>
           <ion-list-header>
                     <ion-label>Tipo</ion-label>
         </ion-list-header>
-              <ion-row>
-                  <ion-col>
-                    <ion-item>
-                        <ion-label>Moderador</ion-label>
+              <ion-row class="ion-no-padding" no-padding>
+                  <ion-col class="ion-no-padding" no-padding>
+                    <ion-item class="ion-no-padding" no-padding>
+                        <ion-label class="ion-no-padding" no-padding>Moderador</ion-label>
                         <ion-radio slot="start" value="888"></ion-radio>
                       </ion-item>
                   </ion-col>
@@ -47,13 +60,69 @@
                         <ion-radio slot="start" value="999"></ion-radio>
                       </ion-item> 
                   </ion-col>
-              </ion-row>
-
-            <ion-label>Name</ion-label>
-      
+              </ion-row>    
 
         </ion-radio-group>
       </ion-list>
+
+        <ion-row>
+            <ion-col size="6">
+                <ion-item>
+                    <ion-label position="floating">Nombre</ion-label>
+                    <ion-input [(ngModel)]="name"></ion-input>
+                  </ion-item>
+            </ion-col>
+            <ion-col size="6">
+                <ion-item>
+                    <ion-label position="floating">Apellido</ion-label>
+                    <ion-input [(ngModel)]="lastname"></ion-input>
+                  </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="6">
+                <ion-item>
+                    <ion-label>Pais</ion-label>
+                    <ion-select interface="popover" (ionChange)="ONCHANGEPAIS($event)" >
+                      <ion-select-option value="{{i}}" *ngFor="let c of countryData; let i = index;">{{c.name}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col size="6">
+                <ion-item>
+                    <ion-label position="floating">Correo</ion-label>
+                    <ion-input [(ngModel)]="email"></ion-input>
+                  </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="6">
+                <ion-item>
+                    <ion-label position="floating">Contraseña</ion-label>
+                    <ion-input [(ngModel)]="password"></ion-input>
+                  </ion-item>
+            </ion-col>
+            <ion-col size="6">
+                <ion-item>
+                    <ion-label position="floating">Telefono</ion-label>
+                    <ion-input [(ngModel)]="referidor"></ion-input>
+                  </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-button 
+            [disabled]="
+            !name||
+            !lastname||
+            !password||
+            !referidor
+            "
+            
+            (click)="agregaradmin()"><ion-icon name="id-card-outline"></ion-icon>&nbsp;Agregar<ion-icon name="add"></ion-icon></ion-button>
+        </ion-row>
+
+
 </section>
 
 
