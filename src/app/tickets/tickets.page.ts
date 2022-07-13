@@ -192,7 +192,6 @@ async EnviarMailPorCreacionDeTicket(){
 
   var databeoboxenviaremailticket = {
     nombre_solicitud: 'beoboxenviaremailticket',
-    to: 'javier20450@gmail.com',
     nombre_autor_ticket: this.informacion_perfil.name+' '+this.informacion_perfil.lastname,
     id_publico_autor_ticket: this.informacion_perfil.id_publico,
     tituloticket: this.tituloticketparaenviarcorreo,
