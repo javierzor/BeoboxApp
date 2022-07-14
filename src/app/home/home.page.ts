@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import { MenuController,LoadingController } from '@ionic/angular';
 import { VariosService } from '../service/varios.service';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
+import { AnunciosleermasPage } from '../modals/anunciosleermas/anunciosleermas.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -50,6 +52,7 @@ export class HomePage {
   respuestabeoboxobteneradmindirecciones: any;
   resumen: any;
   constructor(
+    private modalController: ModalController,
     private loadingController: LoadingController,
     private variosservicios: VariosService,
     private router: Router,
@@ -223,6 +226,23 @@ ionViewWillLeave(){
   this.variosservicios.activar_realtime_resumen_home=false;
 }
 
-
+async leermasanuncio(cadaanuncio){
+    const modal = await this.modalController.create({
+      component: AnunciosleermasPage,
+      componentProps: { 
+        dataparaelmodal: cadaanuncio
+      },
+    });
+    modal.onDidDismiss().then((data) => {
+        console.log('data',data);
+        if(data.data.dismissed==true){
+          this.variosservicios.presentToast("Dirección actualizada");
+        }
+      });
+  
+  
+    return await modal.present();
+  
+}
 
 }

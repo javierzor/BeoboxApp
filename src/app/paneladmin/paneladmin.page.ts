@@ -44,7 +44,9 @@ export class PaneladminPage implements OnInit {
   cambioelselector: boolean=false;
   listasdechat: any;
   filterTerm: string;
-
+  filtermovimientostemporal: string;
+  filtermovimientos: string;
+  mostrarseccionfiltrarporqrcode:any;
 
   constructor(
     private datepipe : DatePipe,
@@ -532,5 +534,44 @@ async VerImagen(ImgUrl) {
       this.variosservicios.activar_realtime_user_conversaciones=false;
     }
 
+    MostrarSeccionFiltarPorBeoCode(){
+
+    }
+
+    paso2(){
+
+    }
+
+
+    filtrarporqrlimpiarbarrafiltro(){
+
+    }
+
+    closeycancelboton(){
+      this.mostrarseccionfiltrarporqrcode=false;
+    }
+    
+    inputfelfiltro(event){
+      this.filtermovimientostemporal=event.target.value;
+      if(!this.mostrarseccionfiltrarporqrcode){
+        this.filtermovimientos='';
+      }
+      console.log('filtermovimientos',this.filtermovimientos);
+      console.log('filtermovimientos Cantidad de caracteres',this.filtermovimientos.length);
+    }
+
+    aplicarfiltro(){
+      this.filtermovimientos=this.filtermovimientostemporal;
+    }
+
+    borrarinputdelfiltroporBeocode(){
+      this.filtermovimientostemporal='';
+    }
+
+    ocultarfiltrobeocode(){
+this.mostrarseccionfiltrarporqrcode=false;
+this.filtermovimientos='';
+
+    }
 
 }

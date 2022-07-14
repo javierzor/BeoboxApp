@@ -87,6 +87,10 @@ const routes: Routes = [
     path: 'editarequipo',
     loadChildren: () => import('./modals/editarequipo/editarequipo.module').then( m => m.EditarequipoPageModule)
   },
+  {
+    path: 'anunciosleermas',
+    loadChildren: () => import('./modals/anunciosleermas/anunciosleermas.module').then( m => m.AnunciosleermasPageModule)
+  },
 ];
 
 @NgModule({

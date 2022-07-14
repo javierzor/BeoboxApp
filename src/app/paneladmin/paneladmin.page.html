@@ -106,13 +106,44 @@ mode="ios"
 </section>
 
 <section *ngIf="segmentModel=='solicitudesdecompras'">
-  <ion-text style="text-align:center;" color="success"><ion-button color="success" (click)="agregarcompra()">
+  <ion-text style="text-align:center;" color="success">
+    <ion-button color="success" (click)="agregarcompra()">
     <ion-icon name="add-circle-outline"></ion-icon>
-    Agregar</ion-button><br></ion-text>
+    Agregar</ion-button>
+    <ion-button *ngIf="!mostrarseccionfiltrarporqrcode" color="primary" (click)="mostrarseccionfiltrarporqrcode=true">
+      <ion-icon name="funnel"></ion-icon>
+      &nbsp;
+      Filtrar</ion-button>
+      <ion-button *ngIf="mostrarseccionfiltrarporqrcode" color="danger" (click)="ocultarfiltrobeocode()">
+        <ion-icon name="funnel"></ion-icon>
+        &nbsp;
+        Quitar</ion-button>
+    
+    <br></ion-text>
+
+    <ion-row *ngIf="mostrarseccionfiltrarporqrcode">
+      <ion-col size="9">
+        <ion-text>Ingrese el Beocode del usuario y aplique el filtro</ion-text>
+        <ion-item lines="none" class="ion-no-padding" no-padding>
+          <strong>OBOX</strong>
+          <ion-input [(ngModel)]="filtermovimientostemporal" (keyup.enter)="paso2()" showCancelButton="never" (ionClear)="filtrarporqrlimpiarbarrafiltro()" placeholder="Ejemplo: A0001 (Cinco caracteres)" animated="true">
+          </ion-input>
+          <button (click)="borrarinputdelfiltroporBeocode()">X</button>
+          <ion-button *ngIf="filtermovimientostemporal" [disabled]="this.filtermovimientostemporal.length!=5"
+          (click)="aplicarfiltro()" size="big">Buscar</ion-button>
+        <ion-button (click)="ocultarfiltrobeocode()" shape="round" fill="outline" expand="full">
+          <ion-icon color="danger" name="funnel"></ion-icon>Quitar
+        </ion-button>
+        </ion-item>
+      </ion-col>
+      <ion-col size="3">
+
+      </ion-col>
+    </ion-row>
     
 <ion-text style="font-size: small;">Usr=Usuario | BC=BeoCode | PTS=Puntos | Nom=Nombre | Tr=Traking | PE=Peso | Or=Origen | Est=Estado | Obs=Observación</ion-text>
 <ion-grid class="ion-no-padding" no-padding>
-  <ion-card *ngFor="let movimiento of respuestadebeoboxadminobtenermovimientos">
+  <ion-card *ngFor="let movimiento of respuestadebeoboxadminobtenermovimientos | filter:filtermovimientos ;">
   <ion-row class="ion-no-padding" no-padding>
     <ion-col size="3.5"  class="ion-no-padding" no-padding>
 

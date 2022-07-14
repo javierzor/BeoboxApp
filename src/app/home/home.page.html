@@ -48,7 +48,9 @@
         <ion-text class="parrafosde2lineas" style="margin-left:15px; color:white;">
           <a *ngIf="cadaanuncio.prioridad=='importante'" style="color:#303030">Importante: </a>
           <a style="color:#606060;">{{cadaanuncio.descripcion}}</a>
-          <span style="position:absolute; bottom:0px; right:0px; cursor:pointer;" class="v2-badge v2-badge-primary" (click)="ocultaranuncio(cadaanuncio, i)">
+          <span style="position:absolute; top:-1px; right:0px; cursor:pointer;" class="v2-badge v2-badge-primary" (click)="leermasanuncio(cadaanuncio)">
+            Leer más</span>
+          <span style="position:absolute; bottom:-1px; right:0px; cursor:pointer;" class="v2-badge v2-badge-primary" (click)="ocultaranuncio(cadaanuncio, i)">
             Ocultar</span>
           <br>
         </ion-text>
