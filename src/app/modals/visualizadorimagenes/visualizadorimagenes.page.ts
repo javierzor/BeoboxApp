@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams,ModalController  } from '@ionic/angular';
+import { NavParams,ModalController, LoadingController  } from '@ionic/angular';
 
 @Component({
   selector: 'app-visualizadorimagenes',
@@ -10,6 +10,7 @@ export class VisualizadorimagenesPage implements OnInit {
   traidopormodalparams: any;
   dataparaelmodal;
   constructor(
+    public loadingController: LoadingController,
     navParams: NavParams,
     public modalController: ModalController,
 
@@ -20,6 +21,7 @@ export class VisualizadorimagenesPage implements OnInit {
 
   ngOnInit() {
     this.traidopormodalparamsFuction();
+    this.loadinginicial();
 
   }
 
@@ -34,6 +36,14 @@ export class VisualizadorimagenesPage implements OnInit {
     this.modalController.dismiss({
       'dismissed': false
     });
+  }
+
+  async loadinginicial(){
+    const actualizando = await this.loadingController.create({
+      message: 'Cargando imagen, porfavor espere...',spinner: 'bubbles',duration: 3500,
+      });
+      actualizando.present();
+
   }
 
 
