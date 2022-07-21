@@ -14,6 +14,7 @@ import { ActualizarretirooficinaPage } from '../modals/actualizarretirooficina/a
 import { VerconversacionPage } from '../modals/verconversacion/verconversacion.page';
 import { AdminverconversacionPage } from '../modals/adminverconversacion/adminverconversacion.page';
 import { EditarequipoPage } from '../modals/editarequipo/editarequipo.page';
+import {CalendarModal,CalendarModalOptions,DayConfig,CalendarResult} from 'ion2-calendar';
 
 
 @Component({
@@ -571,6 +572,58 @@ async VerImagen(ImgUrl) {
     ocultarfiltrobeocode(){
 this.mostrarseccionfiltrarporqrcode=false;
 this.filtermovimientos='';
+
+    }
+
+    eliminarmovimiento(movimientoid){
+      this.variosservicios.presentToast("Porfavor Espere...");
+        var databeoboxeliminarmovimiento = {
+        nombre_solicitud:'beoboxeliminarmovimiento',
+        id: movimientoid
+      }
+      this.variosservicios.variasfunciones(databeoboxeliminarmovimiento).subscribe(async( res: any ) =>{
+        console.log('respuesta de beoboxeliminarmovimiento', res);
+
+
+        this.segmentModel='solicitudesdecompras';
+        this.segmentChanged();
+
+        });
+      
+    }
+
+    async openCalendar() {
+      const options: CalendarModalOptions = {
+        pickMode: 'single',
+        title: 'Reporte Diario (Seleccione Dia)',
+        doneLabel: 'Seleccionar',
+        canBackwardsSelected: true
+      };
+     
+      const myCalendar = await this.modalController.create({
+        component: CalendarModal,
+        componentProps: { options }
+      });
+     
+      myCalendar.present();
+     
+      const event: any = await myCalendar.onDidDismiss();
+      const date = event.data;
+      // const ano: CalendarResult = date.years;
+      // const mes: CalendarResult = date.months;
+      // const dia: CalendarResult = date.date;
+      const fechanumerica = this.datepipe.transform(date.string, 'yyyyMMdd');
+      console.log(fechanumerica);
+      var databeoboxconsultarreporte = {
+        nombre_solicitud:'beoboxconsultarreportediario',
+        dianumericoaconsultar: fechanumerica,
+      }
+      this.variosservicios.variasfunciones(databeoboxconsultarreporte).subscribe(async( res: any ) =>{
+        console.log('respuesta de beoboxconsultarreporte', res);
+        this.cambioelselector=false;
+        this.reportederegistros=res;
+        });
+
 
     }
 

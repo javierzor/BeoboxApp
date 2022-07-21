@@ -4,6 +4,7 @@ import { VariosService } from 'src/app/service/varios.service';
 import * as CryptoJS from 'crypto-js';
 import { ImageService } from '../../service/image.service';
 import { Image } from './../../models/image.model';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-nuevacompra',
@@ -38,6 +39,7 @@ export class NuevacompraPage implements OnInit {
   observacion:any;
 
   constructor(
+    private barcodeScanner: BarcodeScanner,
     private imageService: ImageService,
     private varios: VariosService,
     private modalController: ModalController,
@@ -209,6 +211,15 @@ export class NuevacompraPage implements OnInit {
   borrarSelectedUser(){
     this.selected_user=undefined;
   }
-
+  
+  escanearQRDeTrakig(){
+    this.barcodeScanner.scan().then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+      this.traking=barcodeData;
+     }).catch(err => {
+         console.log('Error', err);
+         this.traking=err;
+     });
+  }
   
 }

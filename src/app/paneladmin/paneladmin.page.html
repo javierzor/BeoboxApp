@@ -174,15 +174,18 @@ mode="ios"
 
     </ion-col>
     <ion-col  size="4"   class="ion-no-padding" no-padding>
-      <ion-button size="small" color="primary" text-capitalize >
+      <!-- <ion-button size="small" color="primary" text-capitalize >
         Detalles
-      </ion-button>
-      <ion-button (click)="presentAlertRadio(movimiento)" text-capitalize >
+      </ion-button> -->
+      <ion-button size="small" (click)="presentAlertRadio(movimiento)" text-capitalize >
         <strong>Estado</strong>
       </ion-button>
       
       <ion-button size="small" (click)="VerImagen(movimiento.reciboImgUrl)">
         Ver Imagen
+      </ion-button>
+      <ion-button color="danger" *ngIf="this.varios.tipo_cuenta=='999'" (click)="eliminarmovimiento(movimiento.id)" size="small" >
+        Eliminar
       </ion-button>
       
     </ion-col>
@@ -331,7 +334,8 @@ mode="ios"
             <ion-text><strong>Cod. Postal:</strong> {{cadadireccion.codigo_postal}}</ion-text>
             <br>
             <ion-text><strong>Numero Tlf:</strong> {{cadadireccion.telefono}}</ion-text>
-  
+            <br>
+            <ion-text><strong>Comentario:</strong> {{cadadireccion.comentario}}</ion-text>
             <ion-text></ion-text>
           </ion-col>
         </ion-row>
@@ -367,10 +371,15 @@ mode="ios"
              </ion-item>
           </ion-col>
         </ion-row>
-        <ion-button [disabled]="
-        !fecha_inicio||!fecha_fin||!estado
-        " (click)="consultarReporte()">Consultar</ion-button>
+
+          <ion-button  [disabled]="
+          !fecha_inicio||!fecha_fin||!estado
+          " (click)="consultarReporte()">Consultar</ion-button>
+          
+          <ion-button style="position:absolute; right:0%" (click)="openCalendar()">Consultar Reporte Diario</ion-button>
       </ion-card>
+
+
 
       <section *ngIf="cambioelselector==false&&reportederegistros&&reportederegistros.length>0">
         <ion-card  *ngFor="let reporte of reportederegistros">

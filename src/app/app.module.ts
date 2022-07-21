@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 import { DatePipe } from '@angular/common';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { DatePipe } from '@angular/common';
     IonicModule.forRoot(), 
     AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+                    BarcodeScanner,
                     Clipboard, 
                     DatePipe],
   
