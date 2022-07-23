@@ -90,7 +90,11 @@ const routes: Routes = [
   {
     path: 'anunciosleermas',
     loadChildren: () => import('./modals/anunciosleermas/anunciosleermas.module').then( m => m.AnunciosleermasPageModule)
+  },  {
+    path: 'scannertraking',
+    loadChildren: () => import('./modals/scannertraking/scannertraking.module').then( m => m.ScannertrakingPageModule)
   },
+
 ];
 
 @NgModule({
