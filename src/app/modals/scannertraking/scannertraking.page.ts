@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// To use Html5QrcodeScanner (more info below)
-import {Html5QrcodeScanner} from "html5-qrcode"
 
-// To use Html5Qrcode (more info below)
-import {Html5Qrcode} from "html5-qrcode";
-import { QrcodeResultFormat } from 'html5-qrcode/esm/core';
+import {Html5Qrcode,Html5QrcodeScanner,Html5QrcodeSupportedFormats,Html5QrcodeScannerState,Html5QrcodeScanType} from "html5-qrcode";
 
 
 
@@ -15,12 +11,10 @@ import { QrcodeResultFormat } from 'html5-qrcode/esm/core';
 })
 export class ScannertrakingPage implements OnInit {
 
+  constructor() 
+  {
 
-  constructor() { }
-
-
-  
-
+  }
 
   ngOnInit() {
 
@@ -33,24 +27,35 @@ export class ScannertrakingPage implements OnInit {
         var cameraId = devices[0].id;
         // .. use this to start scanning.
         console.log('cameraId', cameraId);
-
-        // const html5QrCode = new Html5Qrcode(/* element id */ "reader");
-
-        // const html5QrCode = new Html5Qrcode("reader");
-        const config = { fps: 10, qrbox: { width: 250, height: 250 } };
-
-        // html5QrCode.start(cameraId,config, onScanSuccess(), onScanFailure);
-
-
+        const config = { 
+          fps: 10, 
+          qrbox: { width: 250, height: 250 } ,
+          formatsToSupport: [ 
+            Html5QrcodeSupportedFormats.QR_CODE,
+            Html5QrcodeSupportedFormats.AZTEC,
+            Html5QrcodeSupportedFormats.CODABAR,
+            Html5QrcodeSupportedFormats.CODE_39,
+            Html5QrcodeSupportedFormats.CODE_93,
+            Html5QrcodeSupportedFormats.CODE_128,
+            Html5QrcodeSupportedFormats.DATA_MATRIX,
+            Html5QrcodeSupportedFormats.MAXICODE,
+            Html5QrcodeSupportedFormats.ITF,
+            Html5QrcodeSupportedFormats.EAN_13,
+            Html5QrcodeSupportedFormats.EAN_8,
+            Html5QrcodeSupportedFormats.PDF_417,
+            Html5QrcodeSupportedFormats.RSS_14,
+            Html5QrcodeSupportedFormats.RSS_EXPANDED,
+            Html5QrcodeSupportedFormats.UPC_A,
+            Html5QrcodeSupportedFormats.UPC_E,
+            Html5QrcodeSupportedFormats.UPC_EAN_EXTENSION,
+          ]
+        };
 
         const html5QrCode = new Html5Qrcode(/* element id */ "reader");
         html5QrCode.start(
           cameraId, 
-          {
-            fps: 10,    // Optional, frame per seconds for qr code scanning
-            qrbox: { width: 250, height: 250 }  // Optional, if you want bounded box UI
-          },
-          
+          config,
+
           (decodedText, decodedResult) => {
             // do something when code is read
             console.log('decodedText',decodedText);
@@ -62,6 +67,7 @@ export class ScannertrakingPage implements OnInit {
           })
         .catch((err) => {
           // Start failed, handle it.
+          console.log('err del catch', err);
         });
 
 
@@ -77,26 +83,7 @@ export class ScannertrakingPage implements OnInit {
 
 
   }
-  QrcodeResultFormat(): import("html5-qrcode/esm/core").QrcodeSuccessCallback {
-    throw new Error('Method not implemented.');
-  }
 
 }
 
-
-// function onScanSuccess(decodedText, decodedResult) {
-//   // handle the scanned code as you like, for example:
-//   console.log(`Code matched = ${decodedText}`, decodedResult);
-// }
-
-function onScanFailure(error) {
-  // handle scan failure, usually better to ignore and keep scanning.
-  // for example:
-  console.warn(`Code scan error = ${error}`);
-}
-
-
-function onScanSuccess(): import("html5-qrcode/esm/core").QrcodeSuccessCallback {
-  throw new Error('Function not implemented.');
-}
 

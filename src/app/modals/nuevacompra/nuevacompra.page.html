@@ -1,8 +1,11 @@
 
 <ion-content color="light">
 
-  <!-- <ion-button color="danger" click="dismissystep2()"><ion-icon cname="close"></ion-icon></ion-button> -->
-  <ion-fab-button  size="small" (click)="dismiss()" color="danger"><ion-icon name="close"></ion-icon></ion-fab-button>
+
+<section *ngIf="this.step=='1'">
+
+
+<ion-fab-button  size="small" (click)="dismiss()" color="danger"><ion-icon name="close"></ion-icon></ion-fab-button>
   
 <ion-grid class="ion-no-padding" no-padding>
 <ion-row class="ion-no-padding" no-padding>
@@ -111,6 +114,19 @@
   
   <ion-button [disabled]="!selected_user" style="position:fixed; right:0; bottom:0;" (click)="agregarcompra()">
     <ion-icon name="checkmark"></ion-icon>Agregar</ion-button>
-  
+
+</section>
+
+<section *ngIf="this.step=='2'">
+  <ion-card>
+    <ion-fab-button  size="small" (click)="cerrarqrscanner()" color="primary"><ion-icon name="close"></ion-icon></ion-fab-button>
+  </ion-card>
+  <ion-card>
+    <div id="reader" width="100%" height="100%"></div>
+  </ion-card>
+
+</section>
+
+
 </ion-content>
 

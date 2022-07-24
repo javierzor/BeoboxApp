@@ -5,6 +5,7 @@ import * as CryptoJS from 'crypto-js';
 import { ImageService } from '../../service/image.service';
 import { Image } from './../../models/image.model';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+import {Html5Qrcode,Html5QrcodeScanner,Html5QrcodeSupportedFormats,Html5QrcodeScannerState,Html5QrcodeScanType} from "html5-qrcode";
 
 @Component({
   selector: 'app-nuevacompra',
@@ -37,6 +38,9 @@ export class NuevacompraPage implements OnInit {
   mostrarcampopuntos:  boolean = false;
   puntos:any;
   observacion:any;
+  step:any = '1';
+  estado: any;
+  html5QrCode222: Html5Qrcode;
 
   constructor(
     private barcodeScanner: BarcodeScanner,
@@ -47,7 +51,7 @@ export class NuevacompraPage implements OnInit {
 
   ) 
   {
-    this.obtenerprecio_wera_usdsegunfase(); 
+    this.obtenerprecio_wera_usdsegunfase();
    }
 
   ngOnInit() {
@@ -211,15 +215,107 @@ export class NuevacompraPage implements OnInit {
   borrarSelectedUser(){
     this.selected_user=undefined;
   }
+
+
+
   
-  escanearQRDeTrakig(){
-    this.barcodeScanner.scan().then(barcodeData => {
-      console.log('Barcode data', barcodeData);
-      this.traking=barcodeData;
-     }).catch(err => {
-         console.log('Error', err);
-         this.traking=err;
-     });
+  escanearQRDeTrakig() {
+
+    this.step='2';
+
+
+    Html5Qrcode.getCameras().then(devices => {
+      /**
+       * devices would be an array of objects of type:
+       * { id: "id", label: "label" }
+       */
+      if (devices && devices.length) {
+        if(devices.length>1){
+          var cameraId = devices[1].id;
+
+        }
+        else{
+          var cameraId = devices[0].id;
+        }
+        // .. use this to start scanning.
+        console.log('cameraId', cameraId);
+        const config = { 
+          fps: 10, 
+          qrbox: { width: 350, height: 350 } ,
+          formatsToSupport: [ 
+            Html5QrcodeSupportedFormats.QR_CODE,
+            Html5QrcodeSupportedFormats.AZTEC,
+            Html5QrcodeSupportedFormats.CODABAR,
+            Html5QrcodeSupportedFormats.CODE_39,
+            Html5QrcodeSupportedFormats.CODE_93,
+            Html5QrcodeSupportedFormats.CODE_128,
+            Html5QrcodeSupportedFormats.DATA_MATRIX,
+            Html5QrcodeSupportedFormats.MAXICODE,
+            Html5QrcodeSupportedFormats.ITF,
+            Html5QrcodeSupportedFormats.EAN_13,
+            Html5QrcodeSupportedFormats.EAN_8,
+            Html5QrcodeSupportedFormats.PDF_417,
+            Html5QrcodeSupportedFormats.RSS_14,
+            Html5QrcodeSupportedFormats.RSS_EXPANDED,
+            Html5QrcodeSupportedFormats.UPC_A,
+            Html5QrcodeSupportedFormats.UPC_E,
+            Html5QrcodeSupportedFormats.UPC_EAN_EXTENSION,
+          ]
+        };
+
+        this.html5QrCode222 = new Html5Qrcode(/* element id */ "reader");
+        this.html5QrCode222.start(
+          cameraId, 
+          config,
+
+          (decodedText, decodedResult) => {
+            // do something when code is read
+            console.log('decodedText',decodedText);
+            console.log('decodedResult',decodedResult);
+            if(decodedResult){
+              this.traking=decodedResult;
+              this.html5QrCode222.stop().then((ignore) => {
+                // QR Code scanning is stopped.
+                this.step='1';
+                }).catch((err) => {
+                  // Stop failed, handle it.
+                });
+            }
+
+
+          },
+          (errorMessage) => {
+            // parse error, ignore it.
+          })
+        .catch((err) => {
+          // Start failed, handle it.
+          console.log('err del catch', err);
+        });
+
+
+
+        
+      }
+    }).catch(err => {
+      // handle err
+              console.log('error', err);
+
+    });
+
+
+
   }
+
+
+  cerrarqrscanner(){
+    this.estado= Html5QrcodeScannerState;
+    this.html5QrCode222.stop();
+    console.log('this.estado=', this.estado);
+    this.step='1';
+
+  }
+  
+
+
   
 }
