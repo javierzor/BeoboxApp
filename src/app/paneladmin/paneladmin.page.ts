@@ -15,6 +15,7 @@ import { VerconversacionPage } from '../modals/verconversacion/verconversacion.p
 import { AdminverconversacionPage } from '../modals/adminverconversacion/adminverconversacion.page';
 import { EditarequipoPage } from '../modals/editarequipo/editarequipo.page';
 import {CalendarModal,CalendarModalOptions,DayConfig,CalendarResult} from 'ion2-calendar';
+import { ImprimirreportediarioPage } from '../modals/imprimirreportediario/imprimirreportediario.page';
 
 
 @Component({
@@ -622,9 +623,29 @@ this.filtermovimientos='';
         console.log('respuesta de beoboxconsultarreporte', res);
         this.cambioelselector=false;
         this.reportederegistros=res;
+        this.abrirmodalparaimprimirreportediario(this.reportederegistros);
         });
 
 
     }
 
+    
+    async abrirmodalparaimprimirreportediario(reportederegistros){
+
+      const modal = await this.modalController.create({
+        component: ImprimirreportediarioPage,
+        componentProps: { 
+          reportederegistros:reportederegistros
+        }
+        });
+      modal.onDidDismiss().then((data) => {
+          console.log('data',data);
+          if(data.data.dismissed==true){
+          }
+        });
+    
+    
+      return await modal.present();
+
+    }
 }

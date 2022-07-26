@@ -1,0 +1,55 @@
+
+<ion-content>
+  <ion-fab-button (click)="dismiss()" color="danger"><ion-icon name="close"></ion-icon></ion-fab-button>
+
+
+  <section *ngIf="reportederegistros.length>0" id="content" #content>
+    <ion-card  *ngFor="let reporte of reportederegistros">
+      <ion-row>
+        <ion-col>
+          <ion-text><strong>Traking:</strong>{{reporte.traking}}</ion-text>
+          <br>
+          <ion-text><strong>Peso:</strong>{{reporte.peso}}</ion-text>
+          <br>
+          <ion-text><strong>Origen:</strong>{{reporte.origen}}</ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-text><strong>BeoPoint:</strong>{{reporte.monto}}</ion-text>
+          <br>
+          <ion-text><strong>Fecha:</strong>{{reporte.fecha}}</ion-text>
+          <br>
+          <ion-text><strong>Estado:</strong>{{reporte.status}}</ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-text><strong>BeoCode:</strong>{{reporte.userdetalles.id_publico}}</ion-text>
+          <br>
+          <ion-text><strong>Usuario:</strong>{{reporte.userdetalles.username}}</ion-text>
+          <br>
+          <ion-text><strong>nombre:</strong>{{reporte.userdetalles.name}} {{reporte.userdetalles.lastname}}</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </section>
+<!-- 
+  <div id="content">
+    <h3>Hello, this is a H3 tag</h3>
+
+   <p>a pararaph</p>
+</div>
+<div id="editor"></div>
+<button id="cmd">generate PDF</button> -->
+
+
+  <!-- <table >
+    <tr  *ngFor="let reporte of reportederegistros">
+      <th>{{reporte.traking}}</th>
+      <th>{{reporte.fecha}}</th>
+      <th>{{reporte.peso}}</th>
+    </tr>
+  </table> -->
+<!-- </div> -->
+
+<button (click)="downloadPDF()" *ngIf="reportederegistros.length>0">Export To PDF</button>
+
+
+</ion-content>

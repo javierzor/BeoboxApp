@@ -94,6 +94,10 @@ const routes: Routes = [
     path: 'scannertraking',
     loadChildren: () => import('./modals/scannertraking/scannertraking.module').then( m => m.ScannertrakingPageModule)
   },
+  {
+    path: 'imprimirreportediario',
+    loadChildren: () => import('./modals/imprimirreportediario/imprimirreportediario.module').then( m => m.ImprimirreportediarioPageModule)
+  },
 
 ];
 
