@@ -76,7 +76,7 @@
               Traking:
               <ion-input placeholder="Traking" [(ngModel)]="traking">
               </ion-input>
-              <ion-button (click)="escanearQRDeTrakig()"><ion-icon name="qr-code-outline"></ion-icon></ion-button>
+              <ion-button (click)="escanearQRDeTrakig('0')"><ion-icon name="qr-code-outline"></ion-icon></ion-button>
             </ion-item>
             <ion-item class="ion-no-padding" no-padding>
               <ion-label position="floating">Peso: <a style="font-size: 10px;color:rgb(114, 114, 114);">  Gramos</a></ion-label>
@@ -120,6 +120,9 @@
 <section *ngIf="this.step=='2'">
   <ion-card>
     <ion-fab-button  size="small" (click)="cerrarqrscanner()" color="primary"><ion-icon name="close"></ion-icon></ion-fab-button>
+    <section *ngIf="camaras">
+      <ion-button *ngFor="let cadacamara of this.camaras; let i=index;" (click)="escanearQRDeTrakig(i)">{{i+1}}</ion-button>
+    </section>
   </ion-card>
   <ion-card>
     <div id="reader" width="100%" height="100%"></div>

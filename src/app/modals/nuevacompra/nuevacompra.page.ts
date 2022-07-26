@@ -41,6 +41,7 @@ export class NuevacompraPage implements OnInit {
   step:any = '1';
   estado: any;
   html5QrCode222: Html5Qrcode;
+  camaras: any;
 
   constructor(
     private barcodeScanner: BarcodeScanner,
@@ -219,10 +220,13 @@ export class NuevacompraPage implements OnInit {
 
 
   
-  escanearQRDeTrakig() {
+  escanearQRDeTrakig(indexdecamara) {
 
     this.step='2';
 
+    if(this.html5QrCode222){
+        this.html5QrCode222.stop();
+    }
 
     Html5Qrcode.getCameras().then(devices => {
       /**
@@ -230,13 +234,9 @@ export class NuevacompraPage implements OnInit {
        * { id: "id", label: "label" }
        */
       if (devices && devices.length) {
-        if(devices.length>1){
-          var cameraId = devices[1].id;
-
-        }
-        else{
-          var cameraId = devices[0].id;
-        }
+          this.camaras = devices;
+          var cameraId = devices[indexdecamara].id;
+      
         // .. use this to start scanning.
         console.log('cameraId', cameraId);
         const config = { 
